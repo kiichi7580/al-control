@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ぬかガンジンEX</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        #calendar { /* カレンダーを画面全体ではなく少し小さく表示 */
+            max-width: 80%;
+            margin: 0 auto;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/locale/ja.js"></script> <!-- 日本語の言語設定 -->
+</head>
+<body>
+<div class="container">
+ <div class="row">
+    <h4>ぬかガンジンEX</h4> 
+    {% block content %}{% endblock %}
+ </div>
+</div>
+<div id="calendar"></div> <!-- カレンダーの表示用のディビジョン -->
+
+<script>
+   $(document).ready(function () {
+       var calendar = $('#calendar').fullCalendar({
+           header: {
+               left: 'prev,next today',
+               center: 'title',
+               right: 'month,agendaWeek,agendaDay'
+           },
+           events: '/all_events',
+           selectable: true,
+           selectHelper: true,
+           editable: true,
+           eventLimit: true,
+           select: function (start, end, allDay) {
+               var title = prompt("どんな予定がありますか？");
+               if (title) {
+                    var start = moment(start).utcOffset('+09:00').format("YYYY-MM-DD HH:mm:ss");
+                    var end = moment(end).utcOffset('+09:00').format("YYYY-MM-DD HH:mm:ss");
+                   $.ajax({
+                       type: "GET",
+                       url: '/add_event',
+                       data: {'title': title, 'start': start, 'end': end},
+                       dataType: "json",
+                       success: function (data) {
+                           calendar.fullCalendar('refetchEvents');
+                           alert("イベントが追加されました！");
+                       },
+                       error: function (data) {
+                           alert('イベントを追加できませんでした...');
+                       }
+                   });
+               }
+           },
+           eventResize: function (event) {
+                var start = moment(event.start).utcOffset('+09:00').format("YYYY-MM-DD HH:mm:ss");
+                var end = moment(event.end).utcOffset('+09:00').format("YYYY-MM-DD HH:mm:ss");
+               var title = event.title;
+               var id = event.id;
+               $.ajax({
+                   type: "GET",
+                   url: '/update',
+                   data: {'title': title, 'start': start, 'end': end, 'id': id},
+                   dataType: "json",
+                   success: function (data) {
+                       calendar.fullCalendar('refetchEvents');
+                       alert('イベントが更新されました！');
+                   },
+                   error: function (data) {
+                       alert('イベントの更新に問題が発生しました...');
+                   }
+               });
+           },
+           eventDrop: function (event) {
+                var start = moment(event.start).utcOffset('+09:00').format("YYYY-MM-DD HH:mm:ss");
+                var end = moment(event.end).utcOffset('+09:00').format("YYYY-MM-DD HH:mm:ss");
+               var title = event.title;
+               var id = event.id;
+               $.ajax({
+                   type: "GET",
+                   url: '/update',
+                   data: {'title': title, 'start': start, 'end': end, 'id': id},
+                   dataType: "json",
+                   success: function (data) {
+                       calendar.fullCalendar('refetchEvents');
+                       alert('イベントの日程が変更されました！');
+                   },
+                   error: function (data) {
+                       alert('イベントの日程が変更できませんでした...');
+                   }
+               });
+           },
+           eventClick: function (event) {
+               if (confirm("このイベントを削除してもよろしいですか？")) {
+                   var id = event.id;
+                   $.ajax({
+                       type: "GET",
+                       url: '/remove',
+                       data: {'id': id},
+                       dataType: "json",
+                       success: function (data) {
+                           calendar.fullCalendar('refetchEvents');
+                           alert('イベントが削除されました！');
+                       },
+                       error: function (data) {
+                           alert('イベントが削除できませんでした...');
+                       }
+                   });
+               }
+           },
+           eventRender: function (event, element) {
+            element.find('.fc-title').text(event.title); // Show event title
+            element.find('.fc-time').remove(); // Remove event time element
+        }
+       });
+   });
+</script>
+</body>
+</html>
