@@ -3,14 +3,25 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from .models import Event
+from datetime import datetime, timedelta
 
 def home(request):
-    return render(request, 'beer/home.html')
+    today = datetime.today()
+    tomorrow = today + timedelta(days=1)
+    events_for_tomorrow = Event.objects.filter(start__date=tomorrow.date())
+    context = {
+        'events_for_tomorrow': events_for_tomorrow
+    }
+    return render(request, 'beer/home.html', context)
 
 def calendar(request):
+    today = datetime.today()
+    tomorrow = today + timedelta(days=1)
+    events_for_tomorrow = Event.objects.filter(start__date=tomorrow.date())
     all_events = Event.objects.all()
     context = {
         "events": all_events,
+        "events_for_tomorrow": events_for_tomorrow
     }
     return render(request, 'beer/calendar.html', context)
 
@@ -52,3 +63,17 @@ def remove(request):
     event = Event.objects.get(id=id)
     event.delete()
     return JsonResponse({'success': True})
+
+def events_for_tomorrow(request):
+    today = datetime.today()
+    tomorrow = today + timedelta(days=1)
+    events = Event.objects.filter(start__date=tomorrow.date())
+    out = []
+    for event in events:
+        out.append({
+            'title': event.name,
+            'id': event.id,
+            'start': event.start.strftime("%Y-%m-%d"),
+            'end': event.end.strftime("%Y-%m-%d"),
+        })
+    return JsonResponse(out, safe=False)

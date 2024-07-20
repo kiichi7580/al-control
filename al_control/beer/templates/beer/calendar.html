@@ -113,12 +113,33 @@
                    });
                }
            },
+           
            eventRender: function (event, element) {
             element.find('.fc-title').text(event.title); // Show event title
             element.find('.fc-time').remove(); // Remove event time element
         }
        });
+
+       // 明日のイベントをチェックして通知
+       $.ajax({
+           type: "GET",
+           url: '/events_for_tomorrow',
+           dataType: "json",
+           success: function (events) {
+               if (events.length > 0) {
+                   var message = "明日には " + events.length + " 件のイベントがあります:\n";
+                   events.forEach(function (event) {
+                       message += event.title + " (" + event.start +  ")\n";
+                   });
+                   alert(message);
+               }
+           },
+           error: function (data) {
+               alert('明日のイベントの取得に失敗しました...');
+           }
+       });
    });
 </script>
 </body>
 </html>
+
