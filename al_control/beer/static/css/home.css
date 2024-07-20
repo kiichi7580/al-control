@@ -37,12 +37,12 @@ canvas {
 
 #statBox {
   position: relative;
-  width: 300px;
+  width: 300px; 
 }
 
 .switch {
   position: relative;
-  width: 90px;
+  width: 84px;
   margin: 10px auto;
 }
 
@@ -53,8 +53,8 @@ canvas {
   margin-left: 8px;
 }
 
-label {
-  width: 100px;
+.alcohol_amount_label {
+  width: 150px;
 }
 
 .switch-checkbox {
