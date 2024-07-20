@@ -42,12 +42,19 @@ canvas {
 
 .switch {
   position: relative;
-  width: 86px;
+  width: 90px;
   margin: 10px auto;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+}
+
+.input_alcohol_amount {
+  position: relative;
+  width: 100px;
+  margin: 10px auto;
+  margin-left: 8px;
+}
+
+label {
+  width: 100px;
 }
 
 .switch-checkbox {
