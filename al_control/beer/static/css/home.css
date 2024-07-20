@@ -53,8 +53,12 @@ canvas {
   margin-left: 8px;
 }
 
+.input_alcohol_amount-1 {
+  margin-top: 20px;
+}
+
 .alcohol_amount_label {
-  width: 150px;
+  width: 170px;
 }
 
 .switch-checkbox {
@@ -153,6 +157,10 @@ canvas {
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+.alcohol_kind {
+  font-size: 20px;
 }
 
 .incre_decre_btn_container {
