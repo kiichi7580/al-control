@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>alcontrol</title>
+    <script src="{% static 'js/age.js' %}"></script> 
+</head>
+<body>
+    <main>
+        <section>
+            <h1 class="alert">🚨このサイトは20歳以上の方を対象としています🚨</h1>
+        </section>
+        <section>
+            <h1 class="old_order">誕生年を西暦で入力してください</h1>
+        </section>
+        <section>
+            <h3>
+                <form id="ageForm">
+                    <p>
+                        西暦<input type="text" id="birthYear" name="how_old">
+                    </p>
+                    <button type="submit"> <a href="{% url 'home' %}" class="btn btn-primary"> 送信</a></button>
+                </form>
+            </h3>
+        </section>
+    </main>
+</body>
+</html>

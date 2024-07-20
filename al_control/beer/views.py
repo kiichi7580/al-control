@@ -7,6 +7,9 @@ from datetime import datetime, timedelta
 from datetime import datetime
 import pytz
 
+def ageconformation(request):
+    return render(request, 'beer/ageconformation.html')
+
 def home(request):
     today = datetime.today()
     tomorrow = today + timedelta(days=1)
