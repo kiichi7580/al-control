@@ -9,11 +9,13 @@
             margin: 0 auto;
         }
     </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/locale/ja.js"></script> <!-- 日本語の言語設定 -->
+    {% load static %}
+    <script src="{% static 'js/calendar.js' %}"></script> <!-- 外部JSファイルの読み込み -->
 </head>
 <body>
 <div class="container">
@@ -24,122 +26,39 @@
 </div>
 <div id="calendar"></div> <!-- カレンダーの表示用のディビジョン -->
 
-<script>
-   $(document).ready(function () {
-       var calendar = $('#calendar').fullCalendar({
-           header: {
-               left: 'prev,next today',
-               center: 'title',
-               right: 'month,agendaWeek,agendaDay'
-           },
-           events: '/all_events',
-           selectable: true,
-           selectHelper: true,
-           editable: true,
-           eventLimit: true,
-           select: function (start, end, allDay) {
-               var title = prompt("どんな予定がありますか？");
-               if (title) {
-                    var start = moment(start).utcOffset('+09:00').format("YYYY-MM-DD HH:mm:ss");
-                    var end = moment(end).utcOffset('+09:00').format("YYYY-MM-DD HH:mm:ss");
-                   $.ajax({
-                       type: "GET",
-                       url: '/add_event',
-                       data: {'title': title, 'start': start, 'end': end},
-                       dataType: "json",
-                       success: function (data) {
-                           calendar.fullCalendar('refetchEvents');
-                           alert("イベントが追加されました！");
-                       },
-                       error: function (data) {
-                           alert('イベントを追加できませんでした...');
-                       }
-                   });
-               }
-           },
-           eventResize: function (event) {
-                var start = moment(event.start).utcOffset('+09:00').format("YYYY-MM-DD HH:mm:ss");
-                var end = moment(event.end).utcOffset('+09:00').format("YYYY-MM-DD HH:mm:ss");
-               var title = event.title;
-               var id = event.id;
-               $.ajax({
-                   type: "GET",
-                   url: '/update',
-                   data: {'title': title, 'start': start, 'end': end, 'id': id},
-                   dataType: "json",
-                   success: function (data) {
-                       calendar.fullCalendar('refetchEvents');
-                       alert('イベントが更新されました！');
-                   },
-                   error: function (data) {
-                       alert('イベントの更新に問題が発生しました...');
-                   }
-               });
-           },
-           eventDrop: function (event) {
-                var start = moment(event.start).utcOffset('+09:00').format("YYYY-MM-DD HH:mm:ss");
-                var end = moment(event.end).utcOffset('+09:00').format("YYYY-MM-DD HH:mm:ss");
-               var title = event.title;
-               var id = event.id;
-               $.ajax({
-                   type: "GET",
-                   url: '/update',
-                   data: {'title': title, 'start': start, 'end': end, 'id': id},
-                   dataType: "json",
-                   success: function (data) {
-                       calendar.fullCalendar('refetchEvents');
-                       alert('イベントの日程が変更されました！');
-                   },
-                   error: function (data) {
-                       alert('イベントの日程が変更できませんでした...');
-                   }
-               });
-           },
-           eventClick: function (event) {
-               if (confirm("このイベントを削除してもよろしいですか？")) {
-                   var id = event.id;
-                   $.ajax({
-                       type: "GET",
-                       url: '/remove',
-                       data: {'id': id},
-                       dataType: "json",
-                       success: function (data) {
-                           calendar.fullCalendar('refetchEvents');
-                           alert('イベントが削除されました！');
-                       },
-                       error: function (data) {
-                           alert('イベントが削除できませんでした...');
-                       }
-                   });
-               }
-           },
-           
-           eventRender: function (event, element) {
-            element.find('.fc-title').text(event.title); // Show event title
-            element.find('.fc-time').remove(); // Remove event time element
-        }
-       });
+<!-- イベント追加用のモーダル -->
+<div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="eventModalLabel">イベントの追加</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="eventForm">
+          <div class="mb-3">
+            <label for="eventTitle" class="form-label">タイトル</label>
+            <input type="text" class="form-control" id="eventTitle" required>
+          </div>
+          <div class="mb-3">
+            <label for="eventStartTime" class="form-label">開始時間</label>
+            <input type="datetime-local" class="form-control" id="eventStartTime" required>
+          </div>
+          <div class="mb-3">
+            <label for="eventEndTime" class="form-label">終了時間</label>
+            <input type="datetime-local" class="form-control" id="eventEndTime" required>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+        <button type="button" class="btn btn-primary" id="saveEvent">保存</button>
+      </div>
+    </div>
+  </div>
+</div>
 
-       // 明日のイベントをチェックして通知
-       $.ajax({
-           type: "GET",
-           url: '/events_for_tomorrow',
-           dataType: "json",
-           success: function (events) {
-               if (events.length > 0) {
-                   var message = "明日には " + events.length + " 件のイベントがあります:\n";
-                   events.forEach(function (event) {
-                       message += event.title + " (" + event.start +  ")\n";
-                   });
-                   alert(message);
-               }
-           },
-           error: function (data) {
-               alert('明日のイベントの取得に失敗しました...');
-           }
-       });
-   });
-</script>
+<!-- BootstrapのJavaScriptとポップアップモーダルをサポートするJavaScriptの追加 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-

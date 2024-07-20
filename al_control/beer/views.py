@@ -4,6 +4,8 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from .models import Event
 from datetime import datetime, timedelta
+from datetime import datetime
+import pytz
 
 def home(request):
     today = datetime.today()
@@ -29,19 +31,25 @@ def all_events(request):
     all_events = Event.objects.all()
     out = []
     for event in all_events:
+        # Tokyo タイムゾーンで表示
         out.append({
             'title': event.name,
             'id': event.id,
-            'start': event.start.strftime("%Y-%m-%d %H:%M:%S"),
-            'end': event.end.strftime("%Y-%m-%d %H:%M:%S"),
+            'start': event.start.astimezone(pytz.timezone('Asia/Tokyo')).strftime("%Y-%m-%dT%H:%M:%S"),
+            'end': event.end.astimezone(pytz.timezone('Asia/Tokyo')).strftime("%Y-%m-%dT%H:%M:%S"),
         })
-
     return JsonResponse(out, safe=False)
 
 def add_event(request):
     start = request.GET.get("start", None)
     end = request.GET.get("end", None)
     title = request.GET.get("title", None)
+    
+    # タイムゾーンを考慮してローカルタイムに変換
+    tokyo_tz = pytz.timezone('Asia/Tokyo')
+    start = datetime.strptime(start, "%Y-%m-%dT%H:%M").astimezone(tokyo_tz)
+    end = datetime.strptime(end, "%Y-%m-%dT%H:%M").astimezone(tokyo_tz)
+    
     event = Event(name=title, start=start, end=end)
     event.save()
     return JsonResponse({'success': True})
@@ -73,7 +81,8 @@ def events_for_tomorrow(request):
         out.append({
             'title': event.name,
             'id': event.id,
-            'start': event.start.strftime("%Y-%m-%d"),
-            'end': event.end.strftime("%Y-%m-%d"),
+            'start': event.start.astimezone(pytz.timezone('Asia/Tokyo')).strftime("%Y-%m-%dT%H:%M:%S"),
+            'end': event.end.astimezone(pytz.timezone('Asia/Tokyo')).strftime("%Y-%m-%dT%H:%M:%S"),
         })
     return JsonResponse(out, safe=False)
+
