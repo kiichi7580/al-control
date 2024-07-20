@@ -19,101 +19,96 @@
 
     <div class="canvas_container">
         <canvas id="canvas"></canvas>
+        <div class="canvas_handle"></div>
     </div>
 
     <div id="container">
-        <div id="statBox">
-            <div class="switch">
-                <input type="checkbox" name="switch" class="switch-checkbox" id="Filled_Hollow">
-                <label class="switch-label" for="Filled_Hollow">
-                    <span class="switch-inner"></span>
-                    <span class="switch-switch"></span>
-                </label>
+        <div class="row">
+            <div class="input_alcohol_amount">
+                <label for="level">今月の飲酒量:</label>
+                <input type="text" id="level" name="level" value="0" readonly/>
             </div>
-            <div class="switch">
-                <input type="checkbox" name="switch" class="switch-checkbox" id="blue_red">
-                <label class="switch-label" for="blue_red">
-                    <span class="switch-inner"></span>
-                    <span class="switch-switch"></span>
-                </label>
+            <div></div>
+            <div class="input_alcohol_amount">
+                <label for="setting_quantity">設定飲酒量:</label>
+                <input type="text" id="setting_quantity" name="setting_quantity" value="0"/>
             </div>
-            <div class="switch">
-                <input type="text" id="level" value="値を入力" />
+            <div id="statBox">
+                <div class="switch">
+                    <input type="checkbox" name="switch" class="switch-checkbox" id="Filled_Hollow">
+                    <label class="switch-label" for="Filled_Hollow">
+                        <span class="switch-inner"></span>
+                        <span class="switch-switch"></span>
+                    </label>
+                </div>
+                <div class="switch">
+                    <input type="checkbox" name="switch" class="switch-checkbox" id="blue_red">
+                    <label class="switch-label" for="blue_red">
+                        <span class="switch-inner"></span>
+                        <span class="switch-switch"></span>
+                    </label>
+                </div>
             </div>
         </div>
+
         <div id="select_container" class="container mt-4">
             <div class="row">
                 <div class="col-md-6 mb-3">
-                    <button class="select_item w-100 mb-2" type="button">ビール</button>
+                    <button class="select_item w-100 mb-2" type="button" data-quantity="35">ビール</button>
                     <div class="incre_decre_btn_container d-flex justify-content-between align-items-center">
-                        <button class="button btn btn-secondary" id="down">-</button>
-                        <input type="text" value="0" class="inputtext form-control text-center mx-2" id="textbox">
-                        <button class="button btn btn-secondary" id="up">+</button>
-                        <button class="button resetbtn btn btn-danger ml-2" id="reset">リセット</button>
+                        <button class="button btn btn-secondary down" type="button">-</button>
+                        <input type="text" value="0" class="inputtext form-control text-center mx-2 count" readonly>
+                        <button class="button btn btn-secondary up" type="button">+</button>
+                        <button class="button resetbtn btn btn-danger ml-2" type="button">リセット</button>
                     </div>
                 </div>
                 <div class="col-md-6 mb-3">
-                    <button class="select_item w-100 mb-2" type="button">サワー</button>
+                    <button class="select_item w-100 mb-2" type="button" data-quantity="50">サワー</button>
                     <div class="incre_decre_btn_container d-flex justify-content-between align-items-center">
-                        <button class="button btn btn-secondary" id="down">-</button>
-                        <input type="text" value="0" class="inputtext form-control text-center mx-2" id="textbox">
-                        <button class="button btn btn-secondary" id="up">+</button>
-                        <button class="button resetbtn btn btn-danger ml-2" id="reset">リセット</button>
+                        <button class="button btn btn-secondary down" type="button">-</button>
+                        <input type="text" value="0" class="inputtext form-control text-center mx-2 count" readonly>
+                        <button class="button btn btn-secondary up" type="button">+</button>
+                        <button class="button resetbtn btn btn-danger ml-2" type="button">リセット</button>
                     </div>
                 </div>
                 <div class="col-md-6 mb-3">
-                    <button class="select_item w-100 mb-2" type="button">日本酒</button>
+                    <button class="select_item w-100 mb-2" type="button" data-quantity="18">日本酒</button>
                     <div class="incre_decre_btn_container d-flex justify-content-between align-items-center">
-                        <button class="button btn btn-secondary" id="down">-</button>
-                        <input type="text" value="0" class="inputtext form-control text-center mx-2" id="textbox">
-                        <button class="button btn btn-secondary" id="up">+</button>
-                        <button class="button resetbtn btn btn-danger ml-2" id="reset">リセット</button>
+                        <button class="button btn btn-secondary down" type="button">-</button>
+                        <input type="text" value="0" class="inputtext form-control text-center mx-2 count" readonly>
+                        <button class="button btn btn-secondary up" type="button">+</button>
+                        <button class="button resetbtn btn btn-danger ml-2" type="button">リセット</button>
                     </div>
                 </div>
                 <div class="col-md-6 mb-3">
-                    <button class="select_item w-100 mb-2" type="button">ワイン</button>
+                    <button class="select_item w-100 mb-2" type="button" data-quantity="15">ワイン</button>
                     <div class="incre_decre_btn_container d-flex justify-content-between align-items-center">
-                        <button class="button btn btn-secondary" id="down">-</button>
-                        <input type="text" value="0" class="inputtext form-control text-center mx-2" id="textbox">
-                        <button class="button btn btn-secondary" id="up">+</button>
-                        <button class="button resetbtn btn btn-danger ml-2" id="reset">リセット</button>
+                        <button class="button btn btn-secondary down" type="button">-</button>
+                        <input type="text" value="0" class="inputtext form-control text-center mx-2 count" readonly>
+                        <button class="button btn btn-secondary up" type="button">+</button>
+                        <button class="button resetbtn btn btn-danger ml-2" type="button">リセット</button>
                     </div>
                 </div>
                 <div class="col-md-6 mb-3">
-                    <button class="select_item w-100 mb-2" type="button">その他</button>
-                    <div class="incre_decre_btn_container d-flex justify-content-between align-items-center">
-                        <button class="button btn btn-secondary" id="down">-</button>
-                        <input type="text" value="0" class="inputtext form-control text-center mx-2" id="textbox">
-                        <button class="button btn btn-secondary" id="up">+</button>
-                        <button class="button resetbtn btn btn-danger ml-2" id="reset">リセット</button>
-                    </div>
+                    <button class="select_item w-100 mb-2" type="button" data-quantity="200">その他</button>
+                </div>
+            </div>
+        </div>
+        <div class="alcohol_amount_adjustment_buttons">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <button class="adjustment_button decrease_button w-100 mb-2" type="button">減らす</button>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <button class="adjustment_button increase_button w-100 mb-2" type="button">増やす</button>
                 </div>
             </div>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="static/js/home.js"></script>
-    <script src="static/js/add_button.js"></script>
-    <script>
-        $(document).ready(function () {
-            $.ajax({
-                url: '/events_for_tomorrow/',
-                method: 'GET',
-                success: function (data) {
-                    if (data.length > 0) {
-                        var message = "明日には " + data.length + " 件のイベントがあります:\n";
-                        data.forEach(function (event) {
-                            message += event.title + " (" + event.start + ")\n";
-                        });
-                        $('#event-message').text(message);
-                        $('#event-notification').show();
-                    }
-                },
-                error: function () {
-                    console.log("次の日のイベントの取得に失敗しました");
-                }
-            });
-        });
-    </script>
+    <script src="static/js/count_button.js"></script>
+    <script src="static/js/tomorrow_event_notifier.js"></script>
+    <script src="static/js/main.js"></script>
 </body>
 </html>
