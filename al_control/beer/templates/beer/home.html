@@ -24,29 +24,30 @@
 
     <div id="container">
         <div class="row">
-            <div class="input_alcohol_amount">
-                <label for="level">今月の飲酒量:</label>
+            <div class="input_alcohol_amount col-6">
+                <label class="alcohol_amount_label" for="level">今日の飲酒量(ml):</label>
                 <input type="text" id="level" name="level" value="0" readonly/>
-            </div>
-            <div></div>
-            <div class="input_alcohol_amount">
-                <label for="setting_quantity">設定飲酒量:</label>
-                <input type="text" id="setting_quantity" name="setting_quantity" value="0"/>
-            </div>
-            <div id="statBox">
-                <div class="switch">
-                    <input type="checkbox" name="switch" class="switch-checkbox" id="Filled_Hollow">
-                    <label class="switch-label" for="Filled_Hollow">
-                        <span class="switch-inner"></span>
-                        <span class="switch-switch"></span>
-                    </label>
+                <div class="input_alcohol_amount-1">
+                    <label class="alcohol_amount_label" for="setting_quantity">今月の設定飲酒量(ml):</label>
+                    <input type="text" id="setting_quantity" name="setting_quantity" value="0"/>
                 </div>
-                <div class="switch">
-                    <input type="checkbox" name="switch" class="switch-checkbox" id="blue_red">
-                    <label class="switch-label" for="blue_red">
-                        <span class="switch-inner"></span>
-                        <span class="switch-switch"></span>
-                    </label>
+            </div>
+            <div class="statBox col-6 align-self-center">
+                <div id="statBox">
+                    <div class="switch">
+                        <input type="checkbox" name="switch" class="switch-checkbox" id="Filled_Hollow">
+                        <label class="switch-label" for="Filled_Hollow">
+                            <span class="switch-inner"></span>
+                            <span class="switch-switch"></span>
+                        </label>
+                    </div>
+                    <div class="switch">
+                        <input type="checkbox" name="switch" class="switch-checkbox" id="right_blue_beer">
+                        <label class="switch-label" for="right_blue_beer">
+                            <span class="switch-inner"></span>
+                            <span class="switch-switch"></span>
+                        </label>
+                    </div>
                 </div>
             </div>
         </div>
@@ -54,7 +55,9 @@
         <div id="select_container" class="container mt-4">
             <div class="row">
                 <div class="col-md-6 mb-3">
-                    <button class="select_item w-100 mb-2" type="button" data-quantity="35">ビール</button>
+                    <button class="select_item w-100 mb-2" type="button" data-kinds="beer">
+                        <b class="alcohol_kind">ビール</b>   ジョッキ1杯分(350ml)
+                    </button>
                     <div class="incre_decre_btn_container d-flex justify-content-between align-items-center">
                         <button class="button btn btn-secondary down" type="button">-</button>
                         <input type="text" value="0" class="inputtext form-control text-center mx-2 count" readonly>
@@ -63,7 +66,9 @@
                     </div>
                 </div>
                 <div class="col-md-6 mb-3">
-                    <button class="select_item w-100 mb-2" type="button" data-quantity="50">サワー</button>
+                    <button class="select_item w-100 mb-2" type="button" data-kinds="sour">
+                        <b class="alcohol_kind">サワー</b>   グラス1杯分(120ml)
+                    </button>
                     <div class="incre_decre_btn_container d-flex justify-content-between align-items-center">
                         <button class="button btn btn-secondary down" type="button">-</button>
                         <input type="text" value="0" class="inputtext form-control text-center mx-2 count" readonly>
@@ -72,7 +77,9 @@
                     </div>
                 </div>
                 <div class="col-md-6 mb-3">
-                    <button class="select_item w-100 mb-2" type="button" data-quantity="18">日本酒</button>
+                    <button class="select_item w-100 mb-2" type="button" data-kinds="japanese_sake">
+                        <b class="alcohol_kind">日本酒</b>   1合徳利(180ml)
+                    </button>
                     <div class="incre_decre_btn_container d-flex justify-content-between align-items-center">
                         <button class="button btn btn-secondary down" type="button">-</button>
                         <input type="text" value="0" class="inputtext form-control text-center mx-2 count" readonly>
@@ -81,7 +88,9 @@
                     </div>
                 </div>
                 <div class="col-md-6 mb-3">
-                    <button class="select_item w-100 mb-2" type="button" data-quantity="15">ワイン</button>
+                    <button class="select_item w-100 mb-2" type="button" data-kinds="wine">
+                        <b class="alcohol_kind">ワイン</b>   グラス1杯(150ml)
+                    </button>
                     <div class="incre_decre_btn_container d-flex justify-content-between align-items-center">
                         <button class="button btn btn-secondary down" type="button">-</button>
                         <input type="text" value="0" class="inputtext form-control text-center mx-2 count" readonly>
@@ -90,7 +99,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 mb-3">
-                    <button class="select_item w-100 mb-2" type="button" data-quantity="200">その他</button>
+                    <button class="select_item w-100 mb-2" type="button" data-kindsy="">その他</button>
                 </div>
             </div>
         </div>

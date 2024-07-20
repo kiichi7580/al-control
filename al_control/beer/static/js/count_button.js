@@ -24,3 +24,31 @@
   })
 
 })();
+
+
+// document.addEventListener('DOMContentLoaded', () => {
+//   const downButtons = document.querySelectorAll('.down');
+//   const upButtons = document.querySelectorAll('.up');
+//   const textboxes = document.querySelectorAll('.count');
+//   const resetButtons = document.querySelectorAll('.resetbtn');
+
+//   downButtons.forEach((downButton, index) => {
+//     downButton.addEventListener('click', () => {
+//       if (textboxes[index].value >= 1) {
+//         textboxes[index].value--;
+//       }
+//     });
+//   });
+
+//   upButtons.forEach((upButton, index) => {
+//     upButton.addEventListener('click', () => {
+//       textboxes[index].value++;
+//     });
+//   });
+
+//   resetButtons.forEach((resetButton, index) => {
+//     resetButton.addEventListener('click', () => {
+//       textboxes[index].value = 0;
+//     });
+//   });
+// });

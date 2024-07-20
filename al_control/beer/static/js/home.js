@@ -5,10 +5,11 @@ var canvas = document.getElementById("canvas"),
 var w = canvas.width = window.innerWidth,
     h = canvas.height = window.innerHeight,
     particles = [],
+    bubbles = [],
     level = 0,
     setting_quantity = 0,
     fill = false,
-    color = "tomato",
+    color = "#d4af37",
     c;
 
 function particle(x, y, d) {
@@ -22,13 +23,30 @@ function particle(x, y, d) {
   };
 }
 
+function bubble(x, y, d) {
+  this.x = x;
+  this.y = y;
+  this.d = d;
+  this.respawn = function () {
+    this.x = Math.random() * w;
+    this.y = h - (h - 100) * level / 100 - 50 + Math.random() * 20 - 10; // 泡が液面に沿うように配置
+    this.d = Math.random() * 3 + 2; // 泡の大きさ
+  };
+}
+
 function init() {
   c = 0;
   particles = [];
+  bubbles = [];
   for (var i = 0; i < 40; i++) {
     var obj = new particle(0, 0, 0);
     obj.respawn();
     particles.push(obj);
+  }
+  for (var i = 0; i < 100; i++) { // 泡の数を増やす
+    var obj = new bubble(0, 0, 0);
+    obj.respawn();
+    bubbles.push(obj);
   }
   aniId = window.requestAnimationFrame(draw);
 }
@@ -38,6 +56,7 @@ function draw() {
   ctx.fillStyle = color;
   ctx.strokeStyle = color;
 
+  // ビールの液体部分の描画
   ctx.beginPath();
   ctx.moveTo(w, h - (h - 100) * level / 100 - 50);
   ctx.lineTo(w, h);
@@ -49,13 +68,24 @@ function draw() {
     w, h - (h - 100) * level / 100 - 50);
   ctx.fill();
 
-  for (var i = 0; i < 40; i++) {
+  // 泡の描画
+  ctx.fillStyle = "#FFFFFF";
+  for (var i = 0; i < bubbles.length; i++) {
+    ctx.beginPath();
+    ctx.arc(bubbles[i].x, bubbles[i].y, bubbles[i].d, 0, 2 * Math.PI);
+    ctx.fill();
+  }
+
+  // パーティクルの描画
+  ctx.fillStyle = fill ? color : "#FFFFFF";
+  for (var i = 0; i < particles.length; i++) {
     ctx.beginPath();
     ctx.arc(particles[i].x, particles[i].y, particles[i].d, 0, 2 * Math.PI);
-    if (fill)
+    if (fill) {
       ctx.fill();
-    else
+    } else {
       ctx.stroke();
+    }
   }
 
   ctx.fillText("c:" + c + " lv:" + level, 10, 10);
@@ -68,12 +98,19 @@ function update() {
   c++;
   if (100 * Math.PI <= c)
     c = 0;
-  for (var i = 0; i < 40; i++) {
+  for (var i = 0; i < particles.length; i++) {
     particles[i].x = particles[i].x + Math.random() * 2 - 1;
     particles[i].y = particles[i].y - 1;
     particles[i].d = particles[i].d - 0.04;
     if (particles[i].d <= 0)
       particles[i].respawn();
+  }
+  for (var i = 0; i < bubbles.length; i++) {
+    bubbles[i].x = bubbles[i].x + Math.random() * 2 - 1;
+    bubbles[i].d = bubbles[i].d - 0.01;
+    if (bubbles[i].d <= 0 || bubbles[i].y < h - (h - 100) * level / 100 - 60 || bubbles[i].y > h - (h - 100) * level / 100 - 40) {
+      bubbles[i].respawn();
+    }
   }
 }
 
@@ -85,11 +122,11 @@ document.getElementById("Filled_Hollow").onchange = function () {
   fill = document.getElementById("Filled_Hollow").checked;
 }
 
-document.getElementById("blue_red").onchange = function () {
-  if (document.getElementById("blue_red").checked)
-    color = "#34A7C1";
+document.getElementById("right_blue_beer").onchange = function () {
+  if (document.getElementById("right_blue_beer").checked)
+    color = "#add8e6";
   else
-    color = "tomato";
+    color = "#d4af37";
 }
 
 document.getElementById("setting_quantity").oninput = function () {
@@ -104,6 +141,20 @@ window.addEventListener('resize', function () {
 });
 
 init();
+
+
+// 飲酒量の計算式
+function calculateSDU(volume, abv) {
+  return (volume * abv * 0.8) / 20;
+}
+
+// 飲酒データ
+const drinks = [
+  { name: 'beer', volume: 350, abv: 5 },
+  { name: 'sour', volume: 120, abv: 5 },
+  { name: 'japanese_sake', volume: 180, abv: 15 },
+  { name: 'wine', volume: 150, abv: 12 },
+];
 
 
 // お酒の本数
@@ -127,18 +178,26 @@ $(document).ready(function() {
     countInput.val(0);
   });
 
-  $('.increase_button').click(function() {
-    var total = 0;
-    $('.select_item').each(function() {
-      var quantity = parseInt($(this).data('quantity'));
-      var count = parseInt($(this).siblings('.incre_decre_btn_container').find('.count').val());
-      if (!isNaN(quantity) && !isNaN(count)) {
-        total += quantity * count;
+$('.increase_button').click(function() {
+  var total = 0;
+  $('.select_item').each(function() {
+    var kinds = $(this).data('kinds');
+    var count = parseInt($(this).siblings('.incre_decre_btn_container').find('.count').val());
+    if (!isNaN(count)) {
+      if (kinds == 'beer') {
+        total += calculateSDU(drinks[0].volume, drinks[0].abv) * count;
+      } else if (kinds == 'sour') {
+        total += calculateSDU(drinks[1].volume, drinks[1].abv) * count;
+      } else if (kinds == 'japanese_sake') {
+        total += calculateSDU(drinks[2].volume, drinks[2].abv) * count;
+      } else if (kinds == 'wine') {
+        total += calculateSDU(drinks[3].volume, drinks[3].abv) * count;
       }
-    });
-    $('#level').val(total);
-    level = (total / setting_quantity) * 100;
+    }
   });
+  $('#level').val(total);
+  level = (total / setting_quantity) * 100;
+});
 
   $('.decrease_button').click(function() {
     $('#level').val(0);

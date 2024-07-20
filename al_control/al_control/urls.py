@@ -11,7 +11,7 @@ urlpatterns = [
     path('calendar/', views.calendar, name='calendar'),
     path('all_events/', views.all_events, name='all_events'),
     path('add_event/', views.add_event, name='add_event'),
-    path('update/', views.update, name='update'),
-    path('remove/', views.remove, name='remove'),
+    path('update_event/', views.update_event, name='update_event'),
+    path('remove_event/', views.remove_event, name='remove_event'),
     path('events_for_tomorrow/', views.events_for_tomorrow, name='events_for_tomorrow'),
 ]

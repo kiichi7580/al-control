@@ -57,7 +57,7 @@ def add_event(request):
     event.save()
     return JsonResponse({'success': True})
 
-def update(request):
+def update_event(request):
     start = request.GET.get("start", None)
     end = request.GET.get("end", None)
     title = request.GET.get("title", None)
@@ -69,7 +69,7 @@ def update(request):
     event.save()
     return JsonResponse({'success': True})
 
-def remove(request):
+def remove_event(request):
     id = request.GET.get("id", None)
     event = Event.objects.get(id=id)
     event.delete()
