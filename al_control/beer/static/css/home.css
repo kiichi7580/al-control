@@ -1,17 +1,31 @@
 canvas {
   position: absolute;
-  top: 36%;
-  left: 20%;
+  top: 28%;
+  left: 12%;
   width: 400px;
-  height: 560px;
+  height: 520px;
   background: white;
+  border: 7px solid #999999;
+  border-top: 0px;
+}
+
+.canvas_handle {
+  position: absolute;
+  top: 36%;
+  left: 39.3%;
+  width: 56px;
+  height: 260px;
+  background: white;
+  border: 7px solid #999999;
+  border-left: 0px;
+  border-radius: 8px;
 }
 
 #container {
   overflow: hidden;
   position: absolute;
-  top: 36%;
-  left: 56%;
+  top: 24%;
+  left: 50%;
   width: 600px;
   background-color: white;
 }
@@ -166,6 +180,73 @@ canvas {
 
 .select_item:hover {
   background-color: #8B0000;
+  color: white;
+}
+
+.select_item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 2px solid white;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+  opacity: 0;
+}
+
+.select_item:hover::before {
+  opacity: 1;
+}
+
+.fixed-alert {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.content-with-alert {
+  padding-top: 80px; /* 通知バーの高さに合わせて調整 */
+}
+
+.has-alert-padding {
+  padding-top: 80px; /* 通知バーの高さに合わせて調整 */
+}
+
+.alcohol_amount_adjustment_buttons {
+  margin-top: 32px;
+}
+.adjustment_button {
+  border: 2px solid #34A7C1;
+  background-color: white;
+  color: #8B0000;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.increase_button {
+  border: 2px solid #0181dc;
+  color: #0181dc;
+}
+
+.decrease_button {
+  border: 2px solid #fd2213;
+  color: #fd2213;
+}
+
+.increase_button:hover {
+  background-color: #0181dc;
+  color: white;
+}
+
+.decrease_button:hover {
+  background-color: #fd2213;
   color: white;
 }
 
