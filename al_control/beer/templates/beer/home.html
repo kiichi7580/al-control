@@ -6,11 +6,15 @@
     <link rel="stylesheet" type="text/css" href="static/css/home.css" />
 </head>
 <body>
-    <div class="container">
+    <div class="container content-with-alert">
         <div class="row">
             <h1>ホームページ</h1>
             <a href="{% url 'calendar' %}" class="btn btn-primary">カレンダーに移動</a>
         </div>
+    </div>
+
+    <div class="alert alert-info fixed-alert" role="alert" id="event-notification" style="display: none;">
+        <span id="event-message"></span>
     </div>
 
     <div class="canvas_container">
@@ -90,5 +94,26 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="static/js/home.js"></script>
     <script src="static/js/add_button.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: '/events_for_tomorrow/',
+                method: 'GET',
+                success: function (data) {
+                    if (data.length > 0) {
+                        var message = "明日には " + data.length + " 件のイベントがあります:\n";
+                        data.forEach(function (event) {
+                            message += event.title + " (" + event.start + ")\n";
+                        });
+                        $('#event-message').text(message);
+                        $('#event-notification').show();
+                    }
+                },
+                error: function () {
+                    console.log("次の日のイベントの取得に失敗しました");
+                }
+            });
+        });
+    </script>
 </body>
 </html>

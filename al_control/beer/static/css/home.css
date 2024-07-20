@@ -1,6 +1,6 @@
 canvas {
   position: absolute;
-  top: 15%;
+  top: 36%;
   left: 20%;
   width: 400px;
   height: 560px;
@@ -10,7 +10,7 @@ canvas {
 #container {
   overflow: hidden;
   position: absolute;
-  top: 16%;
+  top: 36%;
   left: 56%;
   width: 600px;
   background-color: white;
@@ -184,4 +184,20 @@ canvas {
 
 .select_item:hover::before {
   opacity: 1;
+}
+
+.fixed-alert {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.content-with-alert {
+  padding-top: 80px; /* 通知バーの高さに合わせて調整 */
+}
+
+.has-alert-padding {
+  padding-top: 80px; /* 通知バーの高さに合わせて調整 */
 }
