@@ -5,7 +5,7 @@ from django.http import JsonResponse
 from .models import Event
 
 def home(request):
-    return render(request, 'beer/index.html')
+    return render(request, 'beer/home.html')
 
 def calendar(request):
     all_events = Event.objects.all()
