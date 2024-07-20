@@ -46,7 +46,7 @@ $(document).ready(function () {
             var id = event.id;
             $.ajax({
                 type: "GET",
-                url: '/update',
+                url: '/update_event',
                 data: {'title': title, 'start': start, 'end': end, 'id': id},
                 dataType: "json",
                 success: function (data) {
@@ -65,7 +65,7 @@ $(document).ready(function () {
             var id = event.id;
             $.ajax({
                 type: "GET",
-                url: '/update',
+                url: '/update_event',
                 data: {'title': title, 'start': start, 'end': end, 'id': id},
                 dataType: "json",
                 success: function (data) {
@@ -82,7 +82,7 @@ $(document).ready(function () {
                 var id = event.id;
                 $.ajax({
                     type: "GET",
-                    url: '/remove',
+                    url: '/remove_event',
                     data: {'id': id},
                     dataType: "json",
                     success: function (data) {
