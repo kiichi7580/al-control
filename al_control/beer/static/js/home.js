@@ -5,7 +5,8 @@ var canvas = document.getElementById("canvas"),
 var w = canvas.width = window.innerWidth,
     h = canvas.height = window.innerHeight,
     particles = [],
-    level = 50,
+    level = 0,
+    setting_quantity = 0,
     fill = false,
     color = "tomato",
     c;
@@ -91,6 +92,10 @@ document.getElementById("blue_red").onchange = function () {
     color = "tomato";
 }
 
+document.getElementById("setting_quantity").oninput = function () {
+  setting_quantity = document.getElementById("setting_quantity").value;
+}
+
 window.addEventListener('resize', function () {
   w = canvas.width = window.innerWidth / 2;
   h = canvas.height = window.innerHeight / 2;
@@ -99,3 +104,45 @@ window.addEventListener('resize', function () {
 });
 
 init();
+
+
+// お酒の本数
+$(document).ready(function() {
+  $('.up').click(function() {
+    var countInput = $(this).siblings('.count');
+    var currentCount = parseInt(countInput.val());
+    countInput.val(currentCount + 1);
+  });
+
+  $('.down').click(function() {
+    var countInput = $(this).siblings('.count');
+    var currentCount = parseInt(countInput.val());
+    if (currentCount > 0) {
+      countInput.val(currentCount - 1);
+    }
+  });
+
+  $('.resetbtn').click(function() {
+    var countInput = $(this).siblings('.count');
+    countInput.val(0);
+  });
+
+  $('.increase_button').click(function() {
+    var total = 0;
+    $('.select_item').each(function() {
+      var quantity = parseInt($(this).data('quantity'));
+      var count = parseInt($(this).siblings('.incre_decre_btn_container').find('.count').val());
+      if (!isNaN(quantity) && !isNaN(count)) {
+        total += quantity * count;
+      }
+    });
+    $('#level').val(total);
+    level = (total / setting_quantity) * 100;
+  });
+
+  $('.decrease_button').click(function() {
+    $('#level').val(0);
+    $('.count').val(0);
+    level = 0;
+  });
+});
