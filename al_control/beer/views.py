@@ -81,8 +81,8 @@ def events_for_tomorrow(request):
         out.append({
             'title': event.name,
             'id': event.id,
-            'start': event.start.astimezone(pytz.timezone('Asia/Tokyo')).strftime("%Y-%m-%dT%H:%M:%S"),
-            'end': event.end.astimezone(pytz.timezone('Asia/Tokyo')).strftime("%Y-%m-%dT%H:%M:%S"),
+            'start': event.start.astimezone(pytz.timezone('Asia/Tokyo')).strftime("%m月%d日 %H時%M分"),
+            'end': event.end.astimezone(pytz.timezone('Asia/Tokyo')).strftime("%m月%d日 %H時%M分"),
         })
     return JsonResponse(out, safe=False)
 

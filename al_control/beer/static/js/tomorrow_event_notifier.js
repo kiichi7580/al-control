@@ -6,7 +6,7 @@ $(document).ready(function () {
           if (data.length > 0) {
               var message = "明日には " + data.length + " 件のイベントがあります:\n";
               data.forEach(function (event) {
-                  message += event.title + " (" + event.start + ")\n";
+                message += event.title + " (" + event.start + " から " + event.end + ")\n";
               });
               $('#event-message').text(message);
               $('#event-notification').show();

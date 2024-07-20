@@ -106,13 +106,11 @@ $(document).ready(function () {
         type: "GET",
         url: '/events_for_tomorrow',
         dataType: "json",
-        success: function (events) {
-            if (events.length > 0) {
-                var message = "明日には " + events.length + " 件のイベントがあります:\n";
-                events.forEach(function (event) {
-                    var start = moment(event.start).format('YYYY-MM-DD HH:mm');
-                    var end = moment(event.end).format('YYYY-MM-DD HH:mm');
-                    message += event.title + " (" + start + " - " + end + ")\n";
+        success: function (data) {
+            if (data.length > 0) {
+                var message = "明日には " + data.length + " 件のイベントがあります:\n";
+                data.forEach(function (event) {
+                    message += event.title + " (" + event.start + " から " + event.end + ")\n";
                 });
                 alert(message);
             }
