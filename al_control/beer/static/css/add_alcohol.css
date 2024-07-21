@@ -1,0 +1,277 @@
+canvas {
+  position: absolute;
+  top: 28%;
+  left: 12%;
+  width: 400px;
+  height: 520px;
+  background: white;
+  border: 7px solid #999999;
+  border-top: 0px;
+}
+
+.canvas_handle {
+  position: absolute;
+  top: 36%;
+  left: 39.3%;
+  width: 56px;
+  height: 260px;
+  background: white;
+  border: 7px solid #999999;
+  border-left: 0px;
+  border-radius: 8px;
+}
+
+#container {
+  overflow: hidden;
+  position: absolute;
+  top: 24%;
+  left: 50%;
+  width: 600px;
+  background-color: white;
+}
+
+#level {
+  position: relative;
+  background-color: white;
+}
+
+#statBox {
+  position: relative;
+  width: 300px; 
+}
+
+.switch {
+  position: relative;
+  width: 84px;
+  margin: 10px auto;
+}
+
+.input_alcohol_amount {
+  position: relative;
+  width: 100px;
+  margin: 10px auto;
+  margin-left: 8px;
+}
+
+.input_alcohol_amount-1 {
+  margin-top: 20px;
+}
+
+.alcohol_amount_label {
+  width: 170px;
+}
+
+.switch-checkbox {
+  display: none;
+}
+
+.switch-label {
+  display: block;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid #999999;
+  border-radius: 5px;
+}
+
+.switch-inner {
+  display: block;
+  width: 200%;
+  margin-left: -100%;
+  transition: margin 0.2s ease-in 0s;
+}
+
+.switch-inner:before, .switch-inner:after {
+  display: block;
+  float: left;
+  width: 50%;
+  height: 24px;
+  padding: 0;
+  line-height: 24px;
+  font-size: 14px;
+  color: white;
+  font-family: Trebuchet, Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+.switch-inner:before {
+  content: "Filled";
+  padding-left: 20px;
+  background-color: #999999;
+  color: #FFFFFF;
+}
+
+.switch-inner:after {
+  content: "Hollow";
+  padding-right: 17px;
+  background-color: #EEEEEE;
+  color: #999999;
+  text-align: right;
+}
+
+.switch-switch {
+  display: block;
+  width: 15px;
+  margin: -3.5px;
+  background: #FFFFFF;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 73px;
+  border: 1px solid #999999;
+  border-radius: 3px;
+  transition: all 0.2s ease-in 0s;
+}
+
+.switch-checkbox:checked + .switch-label .switch-inner {
+  margin-left: 0;
+}
+
+.switch-checkbox:checked + .switch-label .switch-switch {
+  right: 0;
+}
+
+#right_blue_beer + label > .switch-inner:before {
+  content: "Light_Blue";
+  padding-right: 20px;
+  background-color: #add8e6;
+  color: #FFFFFF;
+}
+
+#beer_right_blue + label > .switch-inner:after {
+  content: "Beer";
+  padding-right: 24px;
+  background-color: #d4af37;
+  color: #FFFFFF;
+}
+
+#select_container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.select_items {
+  width: calc(50% - 10px);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.alcohol_kind {
+  font-size: 20px;
+}
+
+.incre_decre_btn_container {
+  display: flex;
+  align-items: center;
+}
+
+.button {
+  margin: 0 5px;
+}
+
+.inputtext {
+  width: 50px;
+  text-align: center;
+}
+
+.resetbtn {
+  margin-left: 10px;
+}
+
+
+.select_item {
+  border: 2px solid #8B0000;
+  background-color: white;
+  color: #8B0000;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.select_item:hover {
+  background-color: #8B0000;
+  color: white;
+}
+
+.select_item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 2px solid white;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+  opacity: 0;
+}
+
+.select_item:hover::before {
+  opacity: 1;
+}
+
+.fixed-alert {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.content-with-alert {
+  padding-top: 80px;
+}
+
+.has-alert-padding {
+  padding-top: 80px;
+}
+
+.alcohol_amount_adjustment_buttons {
+  margin-top: 32px;
+}
+.adjustment_button {
+  background-color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.increase_button {
+  border: 2px solid #0181dc;
+  color: #0181dc;
+}
+
+.decrease_button {
+  border: 2px solid #fd2213;
+  color: #fd2213;
+}
+
+.increase_button:hover {
+  background-color: #0181dc;
+  color: white;
+}
+
+.decrease_button:hover {
+  background-color: #fd2213;
+  color: white;
+}
+
+.select_item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 2px solid white;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+  opacity: 0;
+}
