@@ -5,14 +5,31 @@
     <title>ホームページ</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/add_alcohol.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
 </head>
-<body>
-    <div class="container content-with-alert">
-        <div class="row">
-            <h1>ホームページ</h1>
-            <a href="{% url 'calendar' %}" class="btn btn-primary">カレンダーに移動</a>
+
+<header>
+    <h1 class="header_image_link">
+        <a class="icon" href="#"><img src="{% static 'images/icon.png' %}" alt=""></a>
+        <a class="account" href="#"><img src="{% static 'images/account.png' %}" alt=""></a>
+    </h1>
+    <nav>
+        <div class="div1">
+            <ul class="header_word_link">
+                <div class="div2">
+                    <a class="header_word_link" href="{% url 'home' %}">ホーム</a>
+                </div>
+                <div class="div2">
+                    <a class="header_word_link" href="{% url 'calendar'%}">カレンダー</a>
+                </div>
+                <div class="div3">
+                    <li class="register"><a href="#">ログイン</a></li>
+                </div>
+            </ul>
         </div>
-    </div>
+    </nav>
+</header>
+<body>
 
 
 
@@ -51,7 +68,7 @@
             </div>
         </div>
 
-        <div id="select_container" class="container mt-4">
+        <div class="select_container">
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <button class="select_item w-100 mb-2" type="button" data-kinds="beer">
