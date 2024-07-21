@@ -1,3 +1,8 @@
+
+.container{
+  padding-top: 15%;
+  }
+
 h1 {
     text-align: center;
 }
@@ -16,4 +21,21 @@ button {
 }
 .form_box {
     margin: 80px;
+}
+
+
+#birthYear {
+    font-size: 1.2rem; /* 入力フィールドのサイズを大きく */
+    padding: 40px;
+    width: 40%;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 50px;
+}
+#birthYear::placeholder {
+    text-align: center;
+    color: #999; /* プレースホルダーのテキスト色 */
+    font-style: italic; /* プレースホルダーのテキストスタイル */
+    font-size: 50px; 
+    font-style: italic;
 }
