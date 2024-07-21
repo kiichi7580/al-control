@@ -14,14 +14,50 @@ def home(request):
     today = datetime.today()
     tomorrow = today + timedelta(days=1)
     events_for_tomorrow = Event.objects.filter(start__date=tomorrow.date())
+    get_alcohol = AlcoholAmount.objects.all()
     context = {
-        'events_for_tomorrow': events_for_tomorrow
+        'events_for_tomorrow': events_for_tomorrow,
+        'get_alcohol': get_alcohol
     }
     return render(request, 'beer/home.html', context)
 
+def get_alcohol(request):
+    alcoholAmounts = AlcoholAmount.objects.all()
+    out = []
+    for alcoholAmount in alcoholAmounts:
+        out.append({
+            'amount': alcoholAmount.amount,
+        })
+    return JsonResponse(out, safe=False)
+
+# def add_alcohol(request):
+#     amount = request.GET.get("mount", None)
+#     alcohol_amount = AlcoholAmount(amount=amount)
+#     alcohol_amount.save()
+#     return JsonResponse({'success': True})
+
 def add_alcohol(request):
-    amount = request.GET.get("mount", None)
-    alcohol_amount = AlcoholAmount()
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            amount = data.get('level', None)
+            # setting_quantity = data.get('setting_quantity', None)
+
+            # if amount is None or setting_quantity is None:
+            if amount is None:
+                return JsonResponse({'status': 'error', 'message': 'Invalid data'})
+
+            # 新しい飲酒データを保存
+            alcohol_amount = AlcoholAmount(amount=amount)
+            alcohol_amount.save()
+
+            return JsonResponse({'status': 'success', 'message': 'Data saved successfully!'})
+        except Exception as e:
+            return JsonResponse({'status': 'error', 'message': str(e)})
+
+    return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
+
+def add_alcohol_page(request):
     return render(request, 'beer/add_alcohol.html')
 
 def calendar(request):

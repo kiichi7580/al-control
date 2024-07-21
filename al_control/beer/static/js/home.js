@@ -1,3 +1,22 @@
+// $(document).ready(function () {
+//   $.ajax({
+//       url: '/get_alcohol/',
+//       method: 'GET',
+//       success: function (data) {
+//           if (data.amount != NaN) {
+//               var thisMonthAmount = String(data.amount)
+//               $('#this_month_amount').val(thisMonthAmount);
+//               alert("今月の飲酒量が取得できました。")
+//           } else {
+//             alert("今月の飲酒量が取得できませんでした。")
+//           }
+//       },
+//       error: function () {
+//           console.log("次の日のイベントの取得に失敗しました");
+//       }
+//   });
+// });
+
 var canvas = document.getElementById("canvas"),
     ctx = canvas.getContext("2d"),
     aniId;
@@ -145,7 +164,8 @@ init();
 
 // 飲酒量の計算式
 function calculateSDU(volume, abv) {
-  return (volume * abv * 0.8) / 20;
+  // return (volume * abv * 0.8) / 20;
+  return volume * (abv / 100) * 0.8;
 }
 
 // 飲酒データ
@@ -179,25 +199,79 @@ $(document).ready(function() {
   });
 
 $('.increase_button').click(function() {
-  var total = 0;
+  var totalAmount = 0;
   $('.select_item').each(function() {
     var kinds = $(this).data('kinds');
     var count = parseInt($(this).siblings('.incre_decre_btn_container').find('.count').val());
     if (!isNaN(count)) {
       if (kinds == 'beer') {
-        total += calculateSDU(drinks[0].volume, drinks[0].abv) * count;
+        totalAmount += calculateSDU(drinks[0].volume, drinks[0].abv) * count;
       } else if (kinds == 'sour') {
-        total += calculateSDU(drinks[1].volume, drinks[1].abv) * count;
+        totalAmount += calculateSDU(drinks[1].volume, drinks[1].abv) * count;
       } else if (kinds == 'japanese_sake') {
-        total += calculateSDU(drinks[2].volume, drinks[2].abv) * count;
+        totalAmount += calculateSDU(drinks[2].volume, drinks[2].abv) * count;
       } else if (kinds == 'wine') {
-        total += calculateSDU(drinks[3].volume, drinks[3].abv) * count;
+        totalAmount += calculateSDU(drinks[3].volume, drinks[3].abv) * count;
       }
     }
   });
-  $('#level').val(total);
-  level = (total / setting_quantity) * 100;
+  $('#level').val(totalAmount);
+  level = (totalAmount / setting_quantity) * 100;
+
+  // $.ajax({
+  //   type: "GET",
+  //   url: '/add_alcohol',
+  //   data: {'amount': totalAmount},
+  //   dataType: "json",
+  //   success: function (data) {
+  //       alert("飲酒量が追加されました！");
+  //   },
+  //   error: function (data) {
+  //       alert('飲酒量が追加できませんでした...');
+  //   }
+// });
 });
+
+// document.querySelector('.increase_button').addEventListener('click', function() {
+//   var total = 0;
+//   document.querySelectorAll('.select_item').forEach(function(item) {
+//       var kinds = item.getAttribute('data-kinds');
+//       var count = parseInt(item.nextElementSibling.querySelector('.count').value);
+//       if (!isNaN(count)) {
+//           if (kinds == 'beer') {
+//               total += calculateSDU(drinks[0].volume, drinks[0].abv) * count;
+//           } else if (kinds == 'sour') {
+//               total += calculateSDU(drinks[1].volume, drinks[1].abv) * count;
+//           } else if (kinds == 'japanese_sake') {
+//               total += calculateSDU(drinks[2].volume, drinks[2].abv) * count;
+//           } else if (kinds == 'wine') {
+//               total += calculateSDU(drinks[3].volume, drinks[3].abv) * count;
+//           }
+//       }
+//   });
+
+//   fetch('/add_alcohol/', {  // URLを確認
+//       method: 'POST',
+//       headers: {
+//           'Content-Type': 'application/json',
+//           'X-CSRFToken': getCookie('csrftoken')  // CSRFトークンの取得
+//       },
+//       body: JSON.stringify({
+//           amount: total,
+//       })
+//   })
+//   .then(response => response.json())
+//   .then(data => {
+//       if (data.status === 'success') {
+//           alert('Data saved successfully!');
+//       } else {
+//           alert('Error: ' + data.message);
+//       }
+//   })
+//   .catch(error => {
+//       console.error('Error:', error);
+//   });
+// });
 
   $('.decrease_button').click(function() {
     $('#level').val(0);
