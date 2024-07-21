@@ -12,5 +12,4 @@ class Event(models.Model):
 
 
 class AlcoholAmount(models.Model):
-    name = models.CharField(max_length=100)
-    # amount = models.IntegerField()
+    amount = models.IntegerField(null=False, default=0)
