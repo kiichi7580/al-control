@@ -7,7 +7,8 @@ from beer import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.ageconformation,name='ageconformation'),
-    path('home', views.home, name='home'),
+    path('home/', views.home, name='home'),
+    path('add_alcohol/', views.add_alcohol, name='add_alcohol'),
     path('calendar/', views.calendar, name='calendar'),
     path('all_events/', views.all_events, name='all_events'),
     path('add_event/', views.add_event, name='add_event'),
