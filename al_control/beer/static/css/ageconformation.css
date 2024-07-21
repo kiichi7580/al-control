@@ -1,0 +1,19 @@
+h1 {
+    text-align: center;
+}
+form {
+    text-align: center;
+}
+a {
+    text-decoration: none;
+    color: #ffffff;
+}
+button {
+    background-color: #880000;
+    color: #ffffff;
+    padding: 18px 80px;
+    border: none;
+}
+.form_box {
+    margin: 80px;
+}
