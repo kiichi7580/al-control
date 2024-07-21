@@ -39,12 +39,13 @@
     </div>
 
     <div id="container">
+        <p>人間の1日の平均アルコール摂取量は、男性で40g、女性で20gです。</p>
         <div class="row">
             <div class="input_alcohol_amount col-6">
-                <label class="alcohol_amount_label" for="level">今日の飲酒量(ml):</label>
-                <input type="text" id="level" name="level" value="0" readonly/>
+                <label class="alcohol_amount_label" for="this_month_amount">今週のアルコール量(g):</label>
+                <input type="text" id="this_month_amount" name="this_month_amount" value="0" readonly/>
                 <div class="input_alcohol_amount-1">
-                    <label class="alcohol_amount_label" for="setting_quantity">今月の設定飲酒量(ml):</label>
+                    <label class="alcohol_amount_label" for="setting_quantity">今週の設定飲酒量(ml):</label>
                     <input type="text" id="setting_quantity" name="setting_quantity" value="0" readonly/>
                 </div>
             </div>
@@ -96,7 +97,7 @@
                 </div>
             </div>
             <div class="col-md-6 mb-3 add_alcohol_button_container">
-                <button class="add_alcohol_button w-100 mb-2" type="button"><a href="{% url 'add_alcohol' %}">今日のお酒を追加</a></button>
+                <button class="add_alcohol_button w-100 mb-2" type="button"><a href="{% url 'add_alcohol_page' %}">今日のお酒を追加</a></button>
             </div>
         </div>
     </div>
