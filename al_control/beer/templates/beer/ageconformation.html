@@ -9,22 +9,21 @@
 </head>
 <body>
     <main>
-        <h1 class="alert">🚨このサイトは20歳以上の方を対象としています🚨</h1>
-        <section class="form_box">
+        <div class="container">
+            
+            <h1 class="alert">🚨このサイトは20歳以上の方を対象としています🚨</h1>
+            <section class="form_box">
             <h1 class="old_order">誕生年を西暦で入力してください</h1>
             <h3>
                 <form id="ageForm">
                     <p>
-                        西暦<input type="text" id="birthYear" name="how_old">
+                        <input type="text" id="birthYear" name="how_old" placeholder="YYYY">
                     </p>
                     <button type="submit"> <a href="{% url 'home' %}" class="btn btn-primary"> 送信</a></button>
                 </form>
             </h3>
         </section>
-        <h1 class="alert">🚨このサイトは20歳以上の方を対象としています🚨</h1>
-        <h1 class="alert">🚨このサイトは20歳以上の方を対象としています🚨</h1>
-        <h1 class="alert">🚨このサイトは20歳以上の方を対象としています🚨</h1>
-        <h1 class="alert">🚨このサイトは20歳以上の方を対象としています🚨</h1>
+        </div>
     </main>
 </body>
 </html>
