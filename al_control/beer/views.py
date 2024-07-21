@@ -2,7 +2,7 @@
 
 from django.shortcuts import render
 from django.http import JsonResponse
-from .models import Event
+from .models import AlcoholAmount, Event
 from datetime import datetime, timedelta
 from datetime import datetime
 import pytz
@@ -20,6 +20,8 @@ def home(request):
     return render(request, 'beer/home.html', context)
 
 def add_alcohol(request):
+    amount = request.GET.get("mount", None)
+    alcohol_amount = AlcoholAmount()
     return render(request, 'beer/add_alcohol.html')
 
 def calendar(request):

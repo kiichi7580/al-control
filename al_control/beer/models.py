@@ -9,3 +9,8 @@ class Event(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class AlcoholAmount(models.Model):
+    name = models.CharField(max_length=100)
+    # amount = models.IntegerField()
