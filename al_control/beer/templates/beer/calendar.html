@@ -5,7 +5,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         #calendar { /* カレンダーを画面全体ではなく少し小さく表示 */
-            max-width: 80%;
+            max-width: 70%;
             margin: 0 auto;
         }
     </style>
@@ -16,11 +16,32 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/locale/ja.js"></script> <!-- 日本語の言語設定 -->
     {% load static %}
     <script src="{% static 'js/calendar.js' %}"></script> <!-- 外部JSファイルの読み込み -->
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
 </head>
+<header>
+  <h1 class="header_image_link">
+      <a class="icon" href="#"><img src="{% static 'images/icon.png' %}" alt=""></a>
+      <a class="account" href="#"><img src="{% static 'images/account.png' %}" alt=""></a>
+  </h1>
+  <nav>
+      <div class="div1">
+          <ul class="header_word_link">
+              <div class="div2">
+                  <a class="header_word_link" href="{% url 'home' %}">ホーム</a>
+              </div>
+              <div class="div2">
+                  <a class="header_word_link" href="{% url 'calendar'%}">カレンダー</a>
+              </div>
+              <div class="div3">
+                  <li class="register"><a href="#">ログイン</a></li>
+              </div>
+          </ul>
+      </div>
+  </nav>
+</header>
 <body>
 <div class="container">
  <div class="row">
-    <h4>ぬかガンジンEX</h4> 
     {% block content %}{% endblock %}
  </div>
 </div>
