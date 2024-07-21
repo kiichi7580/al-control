@@ -12,7 +12,7 @@
 私たちの身近に、飲酒によって次の日の予定を崩している人がいるのをみて、そのような人の人生を少しでも良くしたいと思い、このアプリを制作しようと考えました。
 
 <div style="float: right; margin: 0 10px 10px 5px;">
-  <img src="al-control/al_control/beer/static/images/icon.png" width="180" height="180">
+  <img src="/al_control/beer/static/images/icon.png" width="180" height="180">
 </div>
 
 <br>
