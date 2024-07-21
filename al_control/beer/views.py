@@ -19,6 +19,9 @@ def home(request):
     }
     return render(request, 'beer/home.html', context)
 
+def add_alcohol(request):
+    return render(request, 'beer/add_alcohol.html')
+
 def calendar(request):
     today = datetime.today()
     tomorrow = today + timedelta(days=1)
