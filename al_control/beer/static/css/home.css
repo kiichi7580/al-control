@@ -231,10 +231,13 @@ canvas {
   padding-top: 80px;
 }
 
-.alcohol_amount_adjustment_buttons {
+.add_alcohol_button_container {
   margin-top: 32px;
 }
-.adjustment_button {
+
+.add_alcohol_button {
+  border: 2px solid #0181dc;
+  color: #0181dc;
   background-color: white;
   padding: 10px 20px;
   border-radius: 5px;
@@ -243,23 +246,9 @@ canvas {
   overflow: hidden;
 }
 
-.increase_button {
-  border: 2px solid #0181dc;
-  color: #0181dc;
-}
 
-.decrease_button {
-  border: 2px solid #fd2213;
-  color: #fd2213;
-}
-
-.increase_button:hover {
+.add_alcohol_button:hover {
   background-color: #0181dc;
-  color: white;
-}
-
-.decrease_button:hover {
-  background-color: #fd2213;
   color: white;
 }
 
