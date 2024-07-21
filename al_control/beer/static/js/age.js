@@ -4,10 +4,9 @@ document.addEventListener('DOMContentLoaded', function () {
     form.addEventListener('submit', function (event) {
         event.preventDefault(); // フォームのデフォルトの送信を防ぐ
         const birthYear = document.getElementById('birthYear').value;
-        const currentYear = new Date().getFullYear();
-        const age = currentYear - birthYear;
+        const age = 2024 - Number(birthYear);
 
-        if (age >= 20) {
+        if (Number(age) >= 20) {
             // 20歳以上ならホームページにリダイレクト
             window.location.href = "/home/";
         } else {
