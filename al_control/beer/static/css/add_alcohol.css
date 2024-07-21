@@ -144,7 +144,7 @@ canvas {
   color: #FFFFFF;
 }
 
-#select_container {
+.select_container {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
