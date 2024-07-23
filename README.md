@@ -22,6 +22,12 @@
 <br>
 
 ***
+
+## イメージ画像
+
+![スクリーンショット 2024-07-24 2 37 56](https://github.com/user-attachments/assets/18865439-b6a0-4d4c-9f20-172efac67183)
+
+
 ## 主な機能
 
 - ### 🗓️ カレンダー機能
@@ -77,7 +83,23 @@
 
 - #### 期限設定を今週・今月に切り替えられるようにしたい
 
+- #### お酒が弱い人向けにも使用してもらえるような機能を考える
+  例)アルコール摂取量が増えていくにつれ、お酒が強くなっていることがわかるようにする
+
 - #### アルコール摂取量はイメージしずらい部分もあると思うので、別の値でも表現できるように考える
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+***
+## デザイン・スライド
+
+[figma上で案だし＆デザイン](https://www.figma.com/design/FTC0NU4bYHqHsCeAJIqDD6/al-control?node-id=0-1&t=H1m7CwkQNXIS8h6u-1)
+
+[googleスライド](https://docs.google.com/presentation/d/1spdKucpLVpqX38Bagf0nOuYYMVQTLgUV5BkQ409BLf8/edit?usp=sharing)
 
 <br>
 <br>
@@ -89,7 +111,6 @@
 ## 参考資料
 
 [純アルコール摂取量](https://www.suntory.co.jp/arp/proper_quantitiy/)
-
 
 
 <br>
